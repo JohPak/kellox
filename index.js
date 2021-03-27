@@ -62,30 +62,30 @@ app.get("/", (req, res) => {
     `);
 });
 
-var counter = 8;
+var counter = 4;
 setInterval(() => {
     counter--;
     var color = null;
-    if(counter == 7) {
+    if(counter == 3) {
         color = "/img/1.png";
     }
-    else if(counter == 6)
-        color = "/img/1.png";
-    else if(counter == 5)
-        color = "/img/2.png";
-    else if(counter == 4)
-        color = "/img/2.png";
-    else if(counter == 3)
-        color = "/img/3.png";
     else if(counter == 2)
+        color = "/img/2.png";
+    else if(counter == 1) {
         color = "/img/3.png";
+        //arvotaan laskuriin +1, jotta vihreä tulee epätasaisemmin ajoin
+        var random_boolean = Math.random() < 0.4; // 40% mahis tulla true
+        if (random_boolean) {
+            counter++;
+        }
+    }
     else
         color = "/img/4.png";
 
     openWebsocketConnections.forEach(connection => connection.send(color));
     if(counter <= 0)
-        counter = 8;
-}, 1000);
+        counter = 4;
+}, 1300);
 
 app.listen(process.env.PORT || port, () => { //Herokua varten. Heroku asettaa portin process.env.PORT:iin
     console.log(`Kellox app listening at http://localhost:${port}`)
