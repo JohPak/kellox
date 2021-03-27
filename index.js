@@ -38,8 +38,8 @@ app.get("/", (req, res) => {
         }
         </style>
         </head>
-            <body id="tausta" style="background: url(/img/kellox.png) no-repeat; background-size: 80px; background-attachment: fixed; background-position: 10px 10px; ">
-            <div style="height:100vh; width:100vw;" id="teksti"></div>
+            <body id="tausta" style="background: url(/img/kellox.png) no-repeat; background-size: 80px; background-attachment: fixed; background-position: 10px 10px; background-color:black;">
+            <div style="height:100vh; width:100vw;" id="valot"><center><img src="/img/1.png" id="valokuva"></center></div>
                 <script>
                     var currentLocation = window.location.href;
                     currentLocation = currentLocation.replace("http://", "ws://");
@@ -52,12 +52,9 @@ app.get("/", (req, res) => {
                     }
                     ws.onmessage = function(s){
                         console.log(s.data);
-                        document.getElementById("tausta").style.backgroundColor=s.data;
-                        if (document.getElementById("tausta").style.backgroundColor == "green") {
-                            document.getElementById("teksti").innerHTML = "<h1>GO!</h1>";
-                        } else {
-                            document.getElementById("teksti").innerHTML = "";
-                        }
+                        // document.getElementById("tausta").style.backgroundColor=s.data;
+                        document.getElementById("valokuva").src=s.data;
+                        
                     }
                 </script>
             </body>
@@ -70,25 +67,25 @@ setInterval(() => {
     counter--;
     var color = null;
     if(counter == 7) {
-        color = "red";
+        color = "/img/1.png";
     }
     else if(counter == 6)
-        color = "black";
+        color = "/img/1.png";
     else if(counter == 5)
-        color = "red";
+        color = "/img/2.png";
     else if(counter == 4)
-        color = "black";
+        color = "/img/2.png";
     else if(counter == 3)
-        color = "yellow";
+        color = "/img/3.png";
     else if(counter == 2)
-        color = "black";
+        color = "/img/3.png";
     else
-        color = "green";
+        color = "/img/4.png";
 
     openWebsocketConnections.forEach(connection => connection.send(color));
     if(counter <= 0)
         counter = 8;
-}, 2000);
+}, 1000);
 
 app.listen(process.env.PORT || port, () => { //Herokua varten. Heroku asettaa portin process.env.PORT:iin
     console.log(`Kellox app listening at http://localhost:${port}`)
