@@ -39,7 +39,7 @@ app.get("/", (req, res) => {
         </style>
         </head>
             <body id="tausta" style="background: url(/img/kellox.png) no-repeat; background-size: 80px; background-attachment: fixed; background-position: 10px 10px; background-color:black;">
-            <div style="height:100vh; width:100vw;" id="valot"><center><img src="/img/1.png" id="valokuva"></center></div>
+            <div style="height:100vh; width:100vw;" id="valot"><center><img src="/img/1.png" id="valokuva" style="padding-top:2em; height:80vh;"></center></div>
                 <script>
                     var currentLocation = window.location.href;
                     currentLocation = currentLocation.replace("http://", "ws://");
